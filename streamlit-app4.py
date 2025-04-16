@@ -195,17 +195,17 @@ def main():
             predictions_df = predictions_df.applymap(lambda x: f'{x:.2f}' if isinstance(x, (int, float)) else x)
             st.table(predictions_df)
 
-            # Provide an option to download the predictions as an Excel file
-            if st.button('Download Predictions as Excel'):
-                excel_file_name = uploaded_file.name.replace('.csv', '_predictions.xlsx')
-                predictions_df.to_excel(excel_file_name, index=False)
-                with open(excel_file_name, "rb") as file:
-                    btn = st.download_button(
-                        label="Download Excel",
-                        data=file,
-                        file_name=excel_file_name,
-                        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                    )
+        # Replace your current Excel export code with this:
+        if st.button('Download Predictions as Excel'):
+            excel_file_name = "predictions.xlsx"
+            predictions_df.to_excel(excel_file_name, index=False)
+            with open(excel_file_name, "rb") as file:
+                st.download_button(
+                    label="Download Excel",
+                    data=file,
+                    file_name=excel_file_name,
+                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                )
 
 if __name__ == '__main__':
     main()
